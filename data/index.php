@@ -135,7 +135,6 @@ require_once('./db.php');
     <link rel="stylesheet/less" type="text/css" href="style.less" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js" ></script>
@@ -146,19 +145,18 @@ require_once('./db.php');
   </head>
   <body>
     <header>
-      <ul class="nav-bar">
-        <li><a href="index.html">Accueil</a></li>
-        <li>Bons plans</li>
-        <li>Contact</li>
-      </ul>
+      <div class="nav_bar">
+        <div class="bougie">
+          <a href="#">Toutes nos bougies</a>
+        </div>
+        <div class="compte">
+          <a href="#">Mon compte</a>
+          <a href="#">Panier</a>
+        </div>
+      </div>
     </header>
 
     <main>
-
-
-
-
-
       <div class="produits">
         <?php
 
@@ -166,14 +164,12 @@ require_once('./db.php');
 
         <div class="p1">
             <img src="<?=$produit['image']?>" >
-            <p><?=$produit['nom_prod']?></p>
-            <p class="prix"><?= $produit['prix']?></p>
+            <p class="prd"><?=$produit['nom_prod']?></p>
+            <p class="prd"><?=$produit['type']?></p>
+            <p class="prix"><?= $produit['prix']?> € </p>
         </div>
       <?php endforeach
           ?>
-
-
-
     </main>
 
     <footer>

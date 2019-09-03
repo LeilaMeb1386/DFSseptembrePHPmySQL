@@ -9,25 +9,31 @@ width:100%;
 
 header{
   height:10vh;
+  width: 100vw;
   display: flex;
-  text-align: center;
   align-items: center;
+  justify-content: center;
   background-color:@color;
 }
 
-.nav-bar {
+
+.nav_bar {
   height:100%;
+  width: 50%;
   display:flex;
-  flex-direction:row;
-  justify-content:space-around;
-  list-style: none;
-  text-align:center;
+  justify-content: space-between;
   align-items: center;
   color:white;
   font-family: 'Slabo 27px';
   font-size: 1.2em;
 }
-
+.nav_bar a{
+  text-decoration: none;
+  color:#fff;
+}
+.compte a:first-child{
+  padding-right: 1em;
+}
 main{
   padding:5%;
   display:flex;
@@ -76,28 +82,32 @@ main{
 }
 
 .produits{
-
   display:flex;
   flex-direction:row;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   height: 40%;
   width:100%;
+
 }
 
 img{
   height:200px;
   width:200px;
-  border: 2px solid black;
+  border: 0px solid black;
 
 }
 
 .prix{
+  text-align: center;
   color:#FF5733;
 }
+.prd{
 
+    text-align: center;
+}
 .p1{
+
     border: 2px solid #AFC7C6;
 }
 
