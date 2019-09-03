@@ -1,0 +1,153 @@
+@color: #828282;
+@taille: 1.5em;
+
+body{
+margin:0;
+width:100%;
+
+}
+
+header{
+  height:10vh;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  background-color:@color;
+}
+
+.nav-bar {
+  height:100%;
+  display:flex;
+  flex-direction:row;
+  justify-content:space-around;
+  list-style: none;
+  text-align:center;
+  align-items: center;
+  color:white;
+  font-family: 'Slabo 27px';
+  font-size: 1.2em;
+}
+
+main{
+  padding:5%;
+  display:flex;
+  min-height:80vh;
+  margin-bottom: 5%;
+  background-color: #f9f6f0;
+
+}
+.presentation{
+  text-align: center;
+  align-items: center;
+  font-size: @taille;
+  color:#1B2733;
+}
+
+.text{
+  text-align: center;
+  align-items: center;
+  color:#20406B;
+  ont-family: 'Francois One';
+}
+
+.animation{
+
+    animation-duration: 3s;
+    animation-name: slidein;
+    animation-iteration-count: infinite;
+  }
+
+  @keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 300%;
+  }
+
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
+}
+
+.p2{
+  color:#B83E21;
+  font-family: 'Abril Fatface';
+  font-size:@taille;
+}
+
+.produits{
+
+  display:flex;
+  flex-direction:row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  height: 40%;
+  width:100%;
+}
+
+img{
+  height:200px;
+  width:200px;
+  border: 2px solid black;
+
+}
+
+.prix{
+  color:#FF5733;
+}
+
+.p1{
+    border: 2px solid #AFC7C6;
+}
+
+
+footer{
+  height:10vh;
+  bottom:0;
+  position:fixed;
+  left: 0;
+  right:0;
+  text-align:center;
+  background-color: #173F57;
+}
+
+.list-no-style{
+  margin:0;
+  padding: 0;
+}
+
+.menu-flex{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height:auto;
+}
+
+.res{
+  height: 5vh;
+  align-items: center;
+  text-align: center;
+
+}
+
+.foot{
+  font-size:1.5em;
+  color:white
+}
+
+@media screen and (max-width: 800px){
+  .nav-bar{
+    display:flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  .produit{
+    display:flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+  }
+
+}
