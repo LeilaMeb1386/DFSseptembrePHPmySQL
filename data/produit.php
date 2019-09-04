@@ -2,8 +2,9 @@
 session_start();
 require_once('./db.php');
   $produits = getAllProducts();
-  // $types = getAllTypes();
-  // $senteurs = getAllSenteurs();
+  $types = getAllTypes();
+  $senteurs = getAllSenteurs();
+
 // //var_dump($comments);die;
 // if (isset($_POST['email']) && isset($_POST['mp'])){
 //   $_SESSION['email']=$_POST['email'];
