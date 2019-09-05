@@ -162,20 +162,59 @@ function getAllSenteurs() {
 // }
 
 
+// function to check if user exist:
+// function VerifUser($nom, $mail){
+//   $connec = new PDO('mysql:dbname=LillyShop', 'root', '0000');
+//   $connec->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+//   $request = $connec->prepare("SELECT nom, mail FROM Utilisateurs WHERE (nom = :nom OR mail = :mail);");
+//   $request->bindParam(':nom', $nom);
+//   $request->bindParam(':mail', $mail);
+//   $request->execute();
+//   //Pour check si le user exist
+//   $verif = $request->fetch(PDO::FETCH_ASSOC);
+//    if($verif) {
+//      header('Location: ./login.php?response=userExist');die;
+//
+//   //return $request->fetch(PDO::FETCH_ASSOC);
+// }
+
+//get one user
+function getOneUser($nom, $mot_passe) {
+  $connec = new PDO('mysql:dbname=LillyShop', 'root', '0000');
+  $connec->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  $request = $connec->prepare("SELECT id, nom, prenom, mail, adresse , Code_postal, role_id FROM users WHERE nom = :nom AND mot_passe = :mot_passe;");
+  $request->bindParam(':nom', $nom);
+  $request->bindParam(':mot_passe', $mot_passe);
+  $request->execute();
+  //Pour check si le user exist
+  $verif = $request->fetch(PDO::FETCH_ASSOC);
+   if($verif) {
+     return $verif;
+   } else {
+     header('Location: ./login.php?status=erreur');die;
+   }
+
+}
 
 //insert user
-// function insertUser($role_id, $nom, $prenom, $mail, $adresse, $code_postal, $mot_passe){
-//   $connec = new PDO("mysql:dbname=LillyShop", 'root', '0000', utf8);
-//   $connec->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-//   $request = $connec->prepare("INSERT INTO Utilisateurs(role_id, nom, prenom, mail, adresse, code_postal, mot_passe) VALUES (:role_id , :nom, :prenom,:mail, :adresse, :code_postal, :mot_passe );");
-//   $request->execute([
-//     ":role_id" => $role_id,
-//     ":nom" => $nom,
-//     ":prenom" => $prenom,
-//     ":mail" => $mail,
-//     ":adresse" => $adresse,
-//     ":code_postal" => $code_postal,
-//     ":mot_passe" => $mot_passe,
-//
-//   ]);
-// }
+function insertUser($role_id, $nom, $prenom, $mail, $adresse, $Code_postal, $mot_passe){
+    // $ggf =  VerifUser($nom, $mail);
+  // try{
+    $connec = new PDO("mysql:dbname=LillyShop", 'root', '0000', utf8);
+    $connec->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $request = $connec->prepare("INSERT INTO Utilisateurs(role_id, nom, prenom, mail, adresse, Code_postal, mot_passe) VALUES (:role_id , :nom, :prenom,:mail, :adresse, :Code_postal, :mot_passe );");
+    $request->execute([
+      ":role_id" => $role_id,
+      ":nom" => $nom,
+      ":prenom" => $prenom,
+      ":mail" => $mail,
+      ":adresse" => $adresse,
+      ":Code_postal" => $Code_postal,
+      ":mot_passe" => $mot_passe,
+
+    ]);
+  // }catch(PDOException $e){
+  //     var_dump($e);die;
+
+
+}

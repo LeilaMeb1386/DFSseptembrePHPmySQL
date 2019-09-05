@@ -4,6 +4,7 @@ require_once('./db.php');
 // var_dump('coucou');die;die;die;die;
  $produits = getAllProducts();
 
+
 // var_dump($produits);die;
 
 ?>
@@ -27,11 +28,15 @@ require_once('./db.php');
     <header>
       <div class="nav_bar">
         <div class="bougie">
-          <a href="produit.php">Toutes nos bougies</a>
+
+
         </div>
         <div class="compte">
-          <a href="#">Mon compte</a>
-          <a href="#">Panier</a>
+          <a href="login.php">Toutes nos bougies</a>
+
+        </div>
+        <div class="deco">
+          <a href="login.php">Se connecter </a>
         </div>
       </div>
     </header>
