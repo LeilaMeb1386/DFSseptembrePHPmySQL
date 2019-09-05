@@ -1,0 +1,97 @@
+-- Adminer 4.7.3 MySQL dump
+
+SET NAMES utf8;
+SET time_zone = '+00:00';
+SET foreign_key_checks = 0;
+SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
+
+CREATE DATABASE `LillyShop` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `LillyShop`;
+
+DROP TABLE IF EXISTS `produit`;
+CREATE TABLE `produit` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `image` varchar(100) DEFAULT NULL,
+  `nom_prod` text NOT NULL,
+  `senteur_id` int(11) NOT NULL,
+  `type_id` int(11) NOT NULL,
+  `description` longtext NOT NULL,
+  `prix` decimal(10,0) NOT NULL,
+  `quantite` int(11) NOT NULL,
+  `disponibilite` int(11) NOT NULL,
+  `date_ajout_prod` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `type_id` (`type_id`),
+  KEY `senteur_id` (`senteur_id`),
+  CONSTRAINT `produit_ibfk_1` FOREIGN KEY (`type_id`) REFERENCES `Types` (`id`),
+  CONSTRAINT `produit_ibfk_2` FOREIGN KEY (`senteur_id`) REFERENCES `Senteur` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `produit` (`id`, `image`, `nom_prod`, `senteur_id`, `type_id`, `description`, `prix`, `quantite`, `disponibilite`, `date_ajout_prod`) VALUES
+(1,	'img.jpeg',	'Autumn Pearl',	1,	1,	'Un mélange riche associant orchidée luxuriante, vanille et freesia, adouci par un tourbillon de sucre\r\n',	28,	20,	1,	'2019-09-03 12:02:21'),
+(2,	'img2.jpeg',	'Rainbow cookie Fantaisie',	2,	1,	'',	0,	10,	1,	'2019-09-03 13:42:19'),
+(3,	'img3.jpeg',	'Garden By The Sea',	4,	2,	'',	0,	2,	1,	'2019-09-03 12:13:27'),
+(4,	'img5.jpeg',	'Mango Peach Salsa',	3,	2,	'',	0,	15,	1,	'2019-09-03 13:50:00');
+
+DROP TABLE IF EXISTS `Role`;
+CREATE TABLE `Role` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `role` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `Role` (`id`, `role`) VALUES
+(1,	'Admin'),
+(2,	'client');
+
+DROP TABLE IF EXISTS `Senteur`;
+CREATE TABLE `Senteur` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `senteur` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `Senteur` (`id`, `senteur`) VALUES
+(1,	'Fraîches'),
+(2,	'Gourmandes'),
+(3,	'Fruités'),
+(4,	'Florales'),
+(5,	'Festives');
+
+DROP TABLE IF EXISTS `Types`;
+CREATE TABLE `Types` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `Types` (`id`, `type`) VALUES
+(1,	'tartelette'),
+(2,	'jarre'),
+(3,	'truc');
+
+DROP TABLE IF EXISTS `Utilisateurs`;
+CREATE TABLE `Utilisateurs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `role_id` int(11) NOT NULL,
+  `nom` text NOT NULL,
+  `prenom` mediumtext NOT NULL,
+  `mail` varchar(30) NOT NULL,
+  `adresse` varchar(50) NOT NULL,
+  `Code_postal` bigint(20) NOT NULL,
+  `mot_passe` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `role_id` (`role_id`),
+  CONSTRAINT `Utilisateurs_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `Role` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `Utilisateurs` (`id`, `role_id`, `nom`, `prenom`, `mail`, `adresse`, `Code_postal`, `mot_passe`) VALUES
+(1,	1,	'Meb',	'Leila',	'l.meb@shop.fr',	'23 rue de ta mère la caissière ',	69007,	'0000'),
+(2,	2,	'meb',	'leila',	'test@hotmail.fr',	'27 rue jiji',	69007,	'0'),
+(3,	2,	'll',	'oo',	'tr',	'hdh',	69000,	'0'),
+(4,	2,	'gg',	'hh',	'fh',	'th',	69007,	'dtfh'),
+(5,	2,	'bb',	'bb',	'bb@bb.fr',	'bb',	36800,	'bbbbb'),
+(6,	2,	'rtg',	'bb',	'',	'tyghrth',	63200,	'ghhrth'),
+(7,	2,	'test',	'test',	'test@test.fr',	'test',	69005,	'test');
+
+-- 2019-09-05 14:52:27

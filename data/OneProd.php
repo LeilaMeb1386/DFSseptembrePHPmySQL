@@ -5,11 +5,11 @@ require_once('./db.php');
 //
 // $_SESSION['id'] = $user['id'];
 // $_SESSION['mail'] = $user['mail'];
-  $produits = getAllProducts();
+
+$idproduct = $_POST['idproduct'];
+  $produit = getOneProduct($idproduct);
   $types = getAllTypes();
   $senteurs = getAllSenteurs();
-
-
 
 
 ?>
@@ -43,34 +43,57 @@ require_once('./db.php');
         </div>
         <div class="deco">
             <a href="deconnexion.php">Deconnexion</a>
-            <a href="index.php">Accueil</a>
+            <a href="produit.php">Toute nos bougies</a>
         </div>
       </div>
     </header>
 
     <main>
+      <div class=produit>
       <div class="produits">
-        <?php
 
-      foreach(  $produits as $key => $produit):?>
+
+
 
         <div class="p1">
             <img src="<?=$produit['image']?>" >
-            <p class="prd"><?=$produit['nom_prod']?></p>
-            <p class="prd"><?=$produit['type']?></p>
+            <p class="prd">nom: <?=$produit['nom_prod']?></p>
+            <p class="prd">Senteur: <?=$produit['senteur']?></p>
+            <p class="prd">Description: <?=$produit['description']?></p>
+            <p class="prd">Type: <?=$produit['type']?></p>
+            <p class="prd">Quantite: <?=$produit['quantite']?></p>
+            <p class="prd">disponibilite: <?=$produit['disponibilite']?></p>
+            <p class="prd">date : <?=$produit['date_ajout_prod']?></p>
             <p class="prix"><?= $produit['prix']?> € </p>
-            <form  action="OneProd.php" method="post">
-              <input type="hidden" name="idproduct" value="<?=$produit['id']?>">
-              <input type="submit" name="" value="Voir produit">
-            </form>
-            <button class="prd" type="button"><a href="panier.php">Ajouter  </a></button>
+            <button class="prd" type="button"><a href="panier.php">Ajouter</a></button>
 
         </div>
 
+        <?php
+        if($_SESSION['role_id'] == 1 ) {?>
+          <div class="form">
+           <form action='./controller/deleteprod.php' method='POST'>
+           <input type='hidden' name='id' value="<?=$produit['id']?>">
+           <input class='delete' type='submit' value='Supprimer ce produit'>
+         </form>
+
+         <form action='./controller/updateprod.php' method='POST'>
+         <input type='hidden' name='id' value="<?=$produit['id']?>">
+         <input class='delete' type='submit' value='modifier ce produit'>
+       </form>
+     </div>
+
+     </div>
 
 
-      <?php endforeach
-          ?>
+
+    <?php }?>
+
+
+
+
+
+
     </main>
 
     <footer id="fh5co-footer" role="contentinfo">

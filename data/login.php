@@ -37,7 +37,7 @@ require_once('./db.php');
                        }?>
                 	<p class='field'>
                   <label for='user'>E-MAIL</label>
-                  <input type='text' id='user' name='user' title='Username' />
+                  <input type='text' id='user' name='email' title='Email' />
                   <span id='valida' class='i i-warning'></span>
                 </p>
               	  <p class='field'>

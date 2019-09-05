@@ -163,43 +163,47 @@ function getAllSenteurs() {
 
 
 // function to check if user exist:
-// function VerifUser($nom, $mail){
-//   $connec = new PDO('mysql:dbname=LillyShop', 'root', '0000');
-//   $connec->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-//   $request = $connec->prepare("SELECT nom, mail FROM Utilisateurs WHERE (nom = :nom OR mail = :mail);");
-//   $request->bindParam(':nom', $nom);
-//   $request->bindParam(':mail', $mail);
-//   $request->execute();
-//   //Pour check si le user exist
-//   $verif = $request->fetch(PDO::FETCH_ASSOC);
-//    if($verif) {
-//      header('Location: ./login.php?response=userExist');die;
+// FUNCTION VERIFUSER($NOM, $MAIL){
+//   $CONNEC = NEW PDO('MYSQL:DBNAME=LILLYSHOP', 'ROOT', '0000');
+//   $CONNEC->SETATTRIBUTE(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+//   $REQUEST = $CONNEC->PREPARE("SELECT NOM, MAIL FROM UTILISATEURS WHERE (NOM = :NOM OR MAIL = :MAIL);");
+//   $REQUEST->BINDPARAM(':NOM', $NOM);
+//   $REQUEST->BINDPARAM(':MAIL', $MAIL);
+//   $REQUEST->EXECUTE();
+//   //POUR CHECK SI LE USER EXIST
+//   $VERIF = $REQUEST->FETCH(PDO::FETCH_ASSOC);
+//    IF($VERIF) {
+//      HEADER('LOCATION: ./LOGIN.PHP?RESPONSE=USEREXIST');DIE;
 //
-//   //return $request->fetch(PDO::FETCH_ASSOC);
+//   //RETURN $REQUEST->FETCH(PDO::FETCH_ASSOC);
 // }
 
 //get one user
-function getOneUser($nom, $mot_passe) {
-  $connec = new PDO('mysql:dbname=LillyShop', 'root', '0000');
-  $connec->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  $request = $connec->prepare("SELECT id, nom, prenom, mail, adresse , Code_postal, role_id FROM users WHERE nom = :nom AND mot_passe = :mot_passe;");
-  $request->bindParam(':nom', $nom);
-  $request->bindParam(':mot_passe', $mot_passe);
-  $request->execute();
-  //Pour check si le user exist
-  $verif = $request->fetch(PDO::FETCH_ASSOC);
-   if($verif) {
-     return $verif;
-   } else {
-     header('Location: ./login.php?status=erreur');die;
-   }
-
+function getOneUser($email, $mot_passe) {
+  try{
+    $connec = new PDO('mysql:dbname=LillyShop', 'root', '0000');
+    $connec->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $request = $connec->prepare("SELECT id, nom, prenom, mail, adresse , Code_postal, role_id FROM Utilisateurs WHERE mail = :email AND mot_passe = :mot_passe;");
+    $request->bindParam(':email', $email);
+    $request->bindParam(':mot_passe', $mot_passe);
+    $request->execute();
+    //Pour check si le user exist
+    $verif = $request->fetch(PDO::FETCH_ASSOC);
+     if($verif){
+       $_SESSION = $verif;
+       header('Location: ../produit.php');die;
+     } else {
+       header('Location: ../login.php?status=erreur');die;
+     }
+  }catch(PDOException $e){
+    var_dump($e);
+  }
 }
 
 //insert user
 function insertUser($role_id, $nom, $prenom, $mail, $adresse, $Code_postal, $mot_passe){
     // $ggf =  VerifUser($nom, $mail);
-  // try{
+  try{
     $connec = new PDO("mysql:dbname=LillyShop", 'root', '0000', utf8);
     $connec->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $request = $connec->prepare("INSERT INTO Utilisateurs(role_id, nom, prenom, mail, adresse, Code_postal, mot_passe) VALUES (:role_id , :nom, :prenom,:mail, :adresse, :Code_postal, :mot_passe );");
@@ -213,8 +217,9 @@ function insertUser($role_id, $nom, $prenom, $mail, $adresse, $Code_postal, $mot
       ":mot_passe" => $mot_passe,
 
     ]);
-  // }catch(PDOException $e){
-  //     var_dump($e);die;
+    header('Location: ../login.php');die;
 
-
+  }catch(PDOException $e){
+      var_dump($e);die;
+    }
 }
