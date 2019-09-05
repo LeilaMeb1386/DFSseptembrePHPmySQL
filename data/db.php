@@ -22,10 +22,10 @@ function getOneProduct($id) {
 
 //insert product
 
-function insertProduct( $image, $nom_prod, $senteur_id,  $type_id, $description, $prix, $quantite, $disponibilite, $date_ajout_prod){
+function insertProduct( $image, $nom_prod, $senteur_id,  $type_id, $description, $prix, $quantite, $disponibilite){
   $connec = new PDO("mysql:dbname=LillyShop", 'root', '0000', utf8);
   $connec->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  $request = $connec->prepare("INSERT INTO produit(image, nom_prod, senteur_id, type_id, description, prix, quantite, disponibilite, date_ajout_prod) VALUES (:image, :nom_prod, :senteur_id, :type_id, :description, :prix, :quantite, :disponibilite, :date_ajout_prod);");
+  $request = $connec->prepare("INSERT INTO produit(image, nom_prod, senteur_id, type_id, description, prix, quantite, disponibilite) VALUES (:image, :nom_prod, :senteur_id, :type_id, :description, :prix, :quantite, :disponibilite);");
   $request->execute([
       ":image" => $image,
       ":nom_prod" => $nom_prod,
@@ -35,7 +35,6 @@ function insertProduct( $image, $nom_prod, $senteur_id,  $type_id, $description,
       ":prix" => $prix,
       ":quantite" => $quantite,
       ":disponibilite" => $disponibilite,
-      ":date_ajout_prod," => $date_ajout_prod,
 
   ]);
 }

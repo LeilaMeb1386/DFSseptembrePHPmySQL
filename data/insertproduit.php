@@ -49,50 +49,93 @@ $idproduct = $_POST['idproduct'];
     </header>
 
     <main>
-      <div class=produit>
-      <div class="produits">
 
-
-
-
-        <div class="p1">
-            <img src="<?=$produit['image']?>" >
-            <p class="prd">nom: <?=$produit['nom_prod']?></p>
-            <p class="prd">Senteur: <?=$produit['senteur']?></p>
-            <p class="prd">Description: <?=$produit['description']?></p>
-            <p class="prd">Type: <?=$produit['type']?></p>
-            <p class="prd">Quantite: <?=$produit['quantite']?></p>
-            <p class="prd">disponibilite: <?=$produit['disponibilite']?></p>
-            <p class="prd">date : <?=$produit['date_ajout_prod']?></p>
-            <p class="prix"><?= $produit['prix']?> € </p>
-            <button class="prd" type="button"><a href="panier.php">Ajouter</a></button>
-
+    <div class='box'>
+      <div class='box-form'>
+        <div class='box-login-tab'></div>
+        <div class='box-login-title'>
+          <div class='i i-login'></div><h2>Nouveau produit</h2>
         </div>
+        <div class='box-login'>
+          <div class='fieldset-body' id='login_form'>
+           <form action="./controller/insertprod.php" method="post">
 
-        <?php
-        if($_SESSION['role_id'] == 1 ) {?>
-          <div class="form">
-           <form action='./controller/deleteprod.php' method='POST'>
-           <input type='hidden' name='id' value="<?=$produit['id']?>">
-           <input class='delete' type='submit' value='Supprimer ce produit'>
-         </form>
+              <p class='field'>
+              <label for='user'>IMAGE</label>
+              <input type='text' id='user' name='image' title='nom' />
+              <span id='valida' class='i i-warning'></span>
+              </p>
+                <p class='field'>
+                <label for='user'>NOM</label>
+                <input type='text' id='user' name='nom_prod' title='prenom' />
+                <span id='valida' class='i i-warning'></span>
+                </p>
+                <p class='field'>
+                <label for='user'>SENTEUR</label>
+                <select class="" name="senteur_id">
+                <?php
+                  foreach ($senteurs as $senteur) {
+                    $id = $senteur['id'];
+                    $senteur = $senteur['senteur'];
+                    echo "<option value='$id'>$senteur</option>";
+                  }
+                ?>
+              </select>
 
-         <form action='./controller/updateprod.php' method='POST'>
-         <input type='hidden' name='id' value="<?=$produit['id']?>">
-         <input class='delete' type='submit' value='modifier ce produit'>
-       </form>
+                <span id='valida' class='i i-warning'></span>
+              </p>
+                <p class='field'>
+                <label for='user'>TYPE</label>
+                <select class="" name="type_id">
+                  <?php
+                    foreach ($types as $type) {
+                      $id = $type['id'];
+                      $type = $type['type'];
+                      echo "<option value='$id'>$type</option>";
+                    }
+                  ?>
+                </select>
 
-       <form action='insertproduit.php' method='POST'>
-       <input type='hidden' name='id' value="<?=$produit['id']?>">
-       <input class='delete' type='submit' value='Ajouter un produit'>
-     </form>
-     </div>
+                <span id='valida' class='i i-warning'></span>
+              </p>
+                <p class='field'>
+                <label for='user'>dESCRIPTION</label>
+                <textarea type='text' id='user' name='description' title='Code_postal' /></textarea>
+                <span id='valida' class='i i-warning'></span>
+              </p>
 
-     </div>
+              <p class='field'>
+              <label for='pass'>PRIX</label>
+              <input type='text' id='pass' name='prix' title='mot_passe' />
+              <span id='valida' class='i i-close'></span>
+            </p>
+
+              	  <p class='field'>
+                  <label for='pass'>QUANTITE</label>
+                  <input type='number' id='pass' name='quantite' title='mot_passe' />
+                  <span id='valida' class='i i-close'></span>
+                </p>
+                <p class='field'>
+                <label for='pass'>DISPONIBILITE</label>
+                <input type='number' id='pass' name='disponibilite' title='mot_passe' />
+                <span id='valida' class='i i-close'></span>
+              </p>
 
 
 
-    <?php }?>
+            	<input type='submit' id='do_login' value='Ajouter' title='Ajouter le nouveau produit' />
+          </form>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
 
 
 
